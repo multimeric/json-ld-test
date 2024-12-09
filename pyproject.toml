@@ -1,0 +1,9 @@
+[project]
+name = "json-ld-test"
+version = "0.0.1"
+dependencies = [
+    
+]
+
+[project.optional-dependencies]
+dev = ["requests", "black"]
