@@ -10,7 +10,16 @@ def make_compact(dir: Path) -> None:
     for test in manifest["sequence"]:
 
         base = manifest["baseIri"]
-        args: list[ast.keyword] = []
+        args: list[ast.keyword] = [
+            ast.keyword(
+                arg="name",
+                value=ast.Constant(test["name"])
+            ),
+            ast.keyword(
+                arg="purpose",
+                value=ast.Constant(test["purpose"])
+            ),
+        ]
         for field in ["input", "expect", "context"]:
             # Each field has a corresponding file
             if field in test:
@@ -28,16 +37,22 @@ def make_compact(dir: Path) -> None:
                     arg=field,
                     value=ast.Constant(filename)
                 ))
+        if "expect" in test:
+            cls = "PositiveCompactTest"
+        else:
+            cls = "NegativeCompactTest"
+
         tests.append(
             ast.Call(
-                func=ast.Name("ContextTestCase"),
+                func=ast.Name(cls),
                 keywords=args
             )
         )
 
     ret = ast.Module(body=[
         ast.ImportFrom("json_ld_test.model", [
-            ast.alias("ContextTestCase"),
+            ast.alias("PositiveCompactTest"),
+            ast.alias("NegativeCompactTest"),
         ], 0),
         ast.Assign(
             targets=[ast.Name("tests")],

@@ -6,4 +6,4 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["requests", "black"]
+dev = ["requests", "black", "pytest"]
