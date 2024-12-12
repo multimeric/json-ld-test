@@ -7,3 +7,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["requests", "black", "pytest"]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
