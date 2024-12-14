@@ -137,6 +137,8 @@ slots:
     range: boolean
   httpLink:
     range: string
+  context:
+    range: string
 enums:
   specVersion:
     permissible_values:
