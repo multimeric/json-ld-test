@@ -17,22 +17,48 @@ classes:
       - description
       - baseIri
       - sequence
-  PositiveEvaluationTest:
-    class_uri: jld:PositiveEvaluationTest
+  Test:
+    abstract: true
     slots:
       - name
       - purpose
       - input
+      - option
+  PositiveTest:
+    is_a: Test
+    slots:
       - expect
-      - option
-  NegativeEvaluationTest:
-    class_uri: jld:NegativeEvaluationTest
+  NegativeTest:
+    is_a: Test
     slots:
-      - name
-      - purpose
-      - input
       - expectErrorCode
-      - option
+  ContextMixin:
+    abstract: true
+    slots:
+      - context
+  OptionalContextMixin:
+    abstract: true
+    slots:
+      - context
+    slot_usage:
+      parts:
+        required: False
+  PositiveContextTest:
+    is_a: PositiveTest
+    mixins:
+      - ContextMixin
+  NegativeContextTest:
+    is_a: NegativeTest
+    mixins:
+      - ContextMixin
+  PositiveOptionalContextTest:
+    is_a: PositiveTest
+    mixins:
+      - OptionalContextMixin
+  NegativeOptionalContextTest:
+    is_a: NegativeTest
+    mixins:
+      - OptionalContextMixin
   Option:
     slots:
       - specVersion
@@ -40,6 +66,13 @@ classes:
       - base
       - normative
       - expandContext
+      - processorFeature
+      - extractAllScripts
+      - contentType
+      - httpStatus
+      - redirectTo
+      - httpLink
+      - produceGeneralizedRdf
 slots:
   base:
     range: uri
@@ -90,6 +123,20 @@ slots:
     required: false
   expandContext:
     range: uri
+  processorFeature:
+    range: string
+  extractAllScripts:
+    range: boolean
+  contentType:
+    range: string
+  httpStatus:
+    range: integer
+  redirectTo:
+    range: uri
+  produceGeneralizedRdf:
+    range: boolean
+  httpLink:
+    range: string
 enums:
   specVersion:
     permissible_values:

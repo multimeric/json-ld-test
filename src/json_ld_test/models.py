@@ -78,8 +78,7 @@ linkml_meta = LinkMLMeta({'default_prefix': 'https://w3c.github.io/json-ld-api/t
                   'rdfs': {'prefix_prefix': 'rdfs',
                            'prefix_reference': 'http://www.w3.org/2000/01/rdf-schema#'},
                   'xsd': {'prefix_prefix': 'xsd',
-                          'prefix_reference': 'http://www.w3.org/2001/XMLSchema#'}},
-     'source_file': 'schemas.yml'} )
+                          'prefix_reference': 'http://www.w3.org/2001/XMLSchema#'}}} )
 
 class SpecVersion(str, Enum):
     json_ld_1FULL_STOP0 = "json-ld-1.0"
@@ -149,4 +148,3 @@ Manifest.model_rebuild()
 PositiveEvaluationTest.model_rebuild()
 NegativeEvaluationTest.model_rebuild()
 Option.model_rebuild()
-
