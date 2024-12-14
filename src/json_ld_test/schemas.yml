@@ -10,13 +10,29 @@ prefixes:
 imports:
   - linkml:types
 classes:
+  Any:
+    class_uri: linkml:Any
   Manifest:
+    abstract: true
     class_uri: mf:Manifest
     slots:
       - name
       - description
-      - baseIri
       - sequence
+  TopLevelManifest:
+    is_a: Manifest
+    slot_usage:
+      sequence:
+        range: string
+  TestManifest:
+    is_a: Manifest
+    slots:
+      - baseIri
+    slot_usage:
+      sequence:
+        any_of:
+          - range: PositiveTest
+          - range: NegativeTest
   Test:
     abstract: true
     slots:
@@ -24,6 +40,7 @@ classes:
       - purpose
       - input
       - option
+      - context
   PositiveTest:
     is_a: Test
     slots:
@@ -32,33 +49,6 @@ classes:
     is_a: Test
     slots:
       - expectErrorCode
-  ContextMixin:
-    abstract: true
-    slots:
-      - context
-  OptionalContextMixin:
-    abstract: true
-    slots:
-      - context
-    slot_usage:
-      parts:
-        required: False
-  PositiveContextTest:
-    is_a: PositiveTest
-    mixins:
-      - ContextMixin
-  NegativeContextTest:
-    is_a: NegativeTest
-    mixins:
-      - ContextMixin
-  PositiveOptionalContextTest:
-    is_a: PositiveTest
-    mixins:
-      - OptionalContextMixin
-  NegativeOptionalContextTest:
-    is_a: NegativeTest
-    mixins:
-      - OptionalContextMixin
   Option:
     slots:
       - specVersion
@@ -73,6 +63,8 @@ classes:
       - redirectTo
       - httpLink
       - produceGeneralizedRdf
+      - compactToRelative
+      - compactArrays
 slots:
   base:
     range: uri
@@ -88,14 +80,12 @@ slots:
   sequence:
     required: true
     multivalued: true
+    range: Any
     # range: PositiveEvaluationTest | NegativeEvaluationTest
-    any_of:
-      - range: PositiveEvaluationTest
-      - range: NegativeEvaluationTest
-    range_expression:
-      any_of:
-        - is_a: PositiveEvaluationTest
-        - is_a: NegativeEvaluationTest
+    # range_expression:
+    #   any_of:
+    #     - is_a: PositiveTest
+    #     - is_a: NegativeTest
   purpose:
     range: string
     # This should be required, but for https://github.com/w3c/json-ld-api/pull/624
@@ -123,22 +113,37 @@ slots:
     required: false
   expandContext:
     range: uri
+    required: false
   processorFeature:
     range: string
+    required: false
   extractAllScripts:
     range: boolean
+    required: false
   contentType:
     range: string
+    required: false
   httpStatus:
     range: integer
+    required: false
   redirectTo:
     range: uri
+    required: false
   produceGeneralizedRdf:
     range: boolean
+    required: false
   httpLink:
     range: string
+    required: false
   context:
     range: string
+    required: false
+  compactToRelative:
+    range: boolean
+    required: false
+  compactArrays:
+    range: boolean
+    required: false
 enums:
   specVersion:
     permissible_values:
