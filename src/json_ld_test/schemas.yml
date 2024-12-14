@@ -1,0 +1,98 @@
+name: TestSuite
+id: https://w3c.github.io/json-ld-api/tests
+prefixes:
+  linkml: https://w3id.org/linkml/
+  dcterms: "http://purl.org/dc/terms/"
+  jld: "https://w3c.github.io/json-ld-api/tests/vocab#"
+  mf: "http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#"
+  rdfs: "http://www.w3.org/2000/01/rdf-schema#"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+imports:
+  - linkml:types
+classes:
+  Manifest:
+    class_uri: mf:Manifest
+    slots:
+      - name
+      - description
+      - baseIri
+      - sequence
+  PositiveEvaluationTest:
+    class_uri: jld:PositiveEvaluationTest
+    slots:
+      - name
+      - purpose
+      - input
+      - expect
+      - option
+  NegativeEvaluationTest:
+    class_uri: jld:NegativeEvaluationTest
+    slots:
+      - name
+      - purpose
+      - input
+      - expectErrorCode
+      - option
+  Option:
+    slots:
+      - specVersion
+      - processingMode
+      - base
+      - normative
+      - expandContext
+slots:
+  base:
+    range: uri
+  name:
+    required: true
+    range: string
+  description:
+    required: true
+    range: string
+  baseIri:
+    required: true
+    range: uri
+  sequence:
+    required: true
+    multivalued: true
+    # range: PositiveEvaluationTest | NegativeEvaluationTest
+    any_of:
+      - range: PositiveEvaluationTest
+      - range: NegativeEvaluationTest
+    range_expression:
+      any_of:
+        - is_a: PositiveEvaluationTest
+        - is_a: NegativeEvaluationTest
+  purpose:
+    range: string
+    # This should be required, but for https://github.com/w3c/json-ld-api/pull/624
+    required: false
+  input:
+    range: string
+    required: true
+  expect:
+    range: string
+    required: true
+  expectErrorCode:
+    range: string
+    required: true
+  option:
+    range: Option
+    required: false
+  processingMode:
+    range: specVersion
+    required: false
+  specVersion:
+    range: specVersion
+    required: false
+  normative:
+    range: boolean
+    required: false
+  expandContext:
+    range: uri
+enums:
+  specVersion:
+    permissible_values:
+      json-ld-1.0:
+      json-ld-1.1:
+

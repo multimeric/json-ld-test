@@ -15,9 +15,9 @@ def download(base_url: str, download_dir: Path, filename: str) -> Path:
     else:
         url = urljoin(base_url, filename)
         download_path.parent.mkdir(parents=True, exist_ok=True)
-        with download_path.open("wb") as fp:
-            response = requests.get(url, stream=Truei)
-            copyfileobj(response.raw, fp)
+        with download_path.open("w") as fp:
+            response = requests.get(url, stream=True)
+            fp.write(response.text)
 
     return download_path
 
@@ -79,7 +79,7 @@ def make_compact(dir: Path) -> None:
             ast.alias("ContextTestCase"),
         ], 0),
         ast.AnnAssign(
-            target=[ast.Name("tests")],
+            target=ast.Name("tests"),
             value=ast.List(elts=tests),
             annotation=ast.Subscript(ast.Name("list"), ast.Name("ContextTestCase")),
             simple=1
