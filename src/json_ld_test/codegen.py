@@ -1,6 +1,9 @@
+"""
+Code for generating package contents: Pydantic models and test JSON.
+This is typically not needed at runtime.
+"""
 from __future__ import annotations
 from pathlib import Path
-from typing import Iterator, TYPE_CHECKING
 from urllib.parse import urljoin
 from linkml.generators import PydanticGenerator
 import requests
