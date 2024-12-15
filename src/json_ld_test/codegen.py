@@ -55,6 +55,8 @@ def download_test_files():
             fetch_file(base_url, test.input)
             if isinstance(test, PositiveEvaluationTest):
                 fetch_file(base_url, test.expect)
+            if test.context is not None:
+                fetch_file(base_url, test.context)
             if test.option is not None and test.option.expandContext is not None:
                 fetch_file(base_url, test.option.expandContext)
 
