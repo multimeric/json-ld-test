@@ -103,6 +103,10 @@ class Manifest(ConfiguredBaseModel):
 
 
 class TopLevelManifest(Manifest):
+    """
+    A manifest that contains a sequence of test manifests.
+
+    """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3c.github.io/json-ld-api/tests',
          'slot_usage': {'sequence': {'name': 'sequence', 'range': 'string'}}})
 
@@ -112,6 +116,10 @@ class TopLevelManifest(Manifest):
 
 
 class TestManifest(Manifest):
+    """
+    A manifest that contains a sequence of tests that all relate to a specific JSON-LD feature.
+
+    """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3c.github.io/json-ld-api/tests',
          'slot_usage': {'sequence': {'any_of': [{'range': 'PositiveEvaluationTest'},
                                                 {'range': 'NegativeEvaluationTest'},
@@ -129,6 +137,9 @@ class TestManifest(Manifest):
 
 
 class Test(ConfiguredBaseModel):
+    """
+    Abstract parent class for all test cases.
+    """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'abstract': True, 'from_schema': 'https://w3c.github.io/json-ld-api/tests'})
 
     name: str = Field(..., json_schema_extra = { "linkml_meta": {'alias': 'name', 'domain_of': ['Manifest', 'Test']} })
@@ -140,6 +151,9 @@ class Test(ConfiguredBaseModel):
 
 
 class PositiveEvaluationTest(Test):
+    """
+    Describes a test case whose input is `input` and expects the output to be `expect`.
+    """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3c.github.io/json-ld-api/tests'})
 
     expect: str = Field(..., json_schema_extra = { "linkml_meta": {'alias': 'expect', 'domain_of': ['PositiveEvaluationTest']} })
@@ -152,6 +166,9 @@ class PositiveEvaluationTest(Test):
 
 
 class PositiveSyntaxTest(Test):
+    """
+    Describes a test case that only has to be parsed successfully to pass.
+    """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3c.github.io/json-ld-api/tests'})
 
     name: str = Field(..., json_schema_extra = { "linkml_meta": {'alias': 'name', 'domain_of': ['Manifest', 'Test']} })
@@ -163,6 +180,9 @@ class PositiveSyntaxTest(Test):
 
 
 class NegativeEvaluationTest(Test):
+    """
+    Describes a test case whose input is `input` and expects to raise an error with the message `expectErrorCode`.
+    """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3c.github.io/json-ld-api/tests'})
 
     expectErrorCode: str = Field(..., json_schema_extra = { "linkml_meta": {'alias': 'expectErrorCode', 'domain_of': ['NegativeEvaluationTest']} })
@@ -175,6 +195,9 @@ class NegativeEvaluationTest(Test):
 
 
 class Option(ConfiguredBaseModel):
+    """
+    Captures all extra options that can be passed to a test.
+    """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3c.github.io/json-ld-api/tests'})
 
     specVersion: Optional[SpecVersion] = Field(None, json_schema_extra = { "linkml_meta": {'alias': 'specVersion', 'domain_of': ['Option']} })

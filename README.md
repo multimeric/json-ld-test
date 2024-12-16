@@ -19,3 +19,8 @@ for test_case in get_all_tests():
     output = get_test_file(test_case.expected)
     assert parse_input(input, context) == output
 ```
+
+## LinkML
+
+This repo also includes a LinkML schema for describing the official JSON-LD test suite.
+Feel free to re-use this for generating code that relates to these entities.

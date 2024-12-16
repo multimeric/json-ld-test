@@ -9,9 +9,14 @@ plugins:
     handlers:
       python:
         options:
-          heading_level: 2
+          heading_level: 3
           show_root_heading: true
           docstring_style: google
           extensions:
           - griffe_pydantic:
               schema: true
+
+markdown_extensions:
+- pymdownx.highlight:
+    use_pygments: true
+    pygments_lang_class: true

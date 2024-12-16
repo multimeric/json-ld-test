@@ -21,10 +21,14 @@ classes:
       - sequence
   TopLevelManifest:
     is_a: Manifest
+    description: >
+      A manifest that contains a sequence of test manifests.
     slot_usage:
       sequence:
         range: string
   TestManifest:
+    description: >
+      A manifest that contains a sequence of tests that all relate to a specific JSON-LD feature.
     is_a: Manifest
     slots:
       - baseIri
@@ -35,6 +39,7 @@ classes:
           - range: NegativeEvaluationTest
           - range: PositiveSyntaxTest
   Test:
+    description: Abstract parent class for all test cases.
     abstract: true
     slots:
       - name
@@ -44,16 +49,20 @@ classes:
       - context
       - requires
   PositiveEvaluationTest:
+    description: Describes a test case whose input is `input` and expects the output to be `expect`.
     is_a: Test
     slots:
       - expect
   PositiveSyntaxTest:
+    description: Describes a test case that only has to be parsed successfully to pass.
     is_a: Test
   NegativeEvaluationTest:
+    description: Describes a test case whose input is `input` and expects to raise an error with the message `expectErrorCode`.
     is_a: Test
     slots:
       - expectErrorCode
   Option:
+    description: Captures all extra options that can be passed to a test.
     slots:
       - specVersion
       - processingMode

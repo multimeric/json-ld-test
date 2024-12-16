@@ -5,7 +5,8 @@ dependencies = [
     "linkml-runtime>=1.8.3",
     "pydantic"
 ]
-requires-python = "=>3.8"
+license = { file = "" }
+requires-python = ">=3.9"
 
 [project.optional-dependencies]
 dev = [
@@ -18,3 +19,14 @@ dev = [
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
+
+[dependency-groups]
+dev = [
+    "mkdocs-material>=9.5.48",
+    "mkdocs>=1.6.1",
+    "mkdocstrings[python]>=0.27.0",
+    "griffe-pydantic>=1.1.0",
+]
+
+[tool.pytest.ini_options]
+addopts = "--doctest-modules"
