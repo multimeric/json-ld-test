@@ -28,3 +28,7 @@ Feel free to re-use this for generating code that relates to these entities.
 ## Documentation
 
 API docs are available at **<https://multimeric.github.io/json-ld-test/>**.
+
+## JSON-LD License
+
+Use of the JSON-LD test suite, originally from https://w3c.github.io/json-ld-api/tests/ is licensed under the [W3C Software and Document License](https://www.w3.org/copyright/software-license-2023/).

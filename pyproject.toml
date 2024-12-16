@@ -13,6 +13,9 @@ authors = [
     { name = "Michael Milton", email = "michael.r.milton@gmail.com"}
 ]
 
+[tool.setuptools]
+license-files = []
+
 [project.optional-dependencies]
 dev = [
     "requests",
