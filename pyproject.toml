@@ -5,8 +5,13 @@ dependencies = [
     "linkml-runtime>=1.8.3",
     "pydantic"
 ]
-license = { file = "" }
+license = { file = "LICENSE" }
 requires-python = ">=3.9"
+description = "The official JSON-LD test suite as a Python package."
+readme = "README.md"
+authors = [
+    { name = "Michael Milton", email = "michael.r.milton@gmail.com"}
+]
 
 [project.optional-dependencies]
 dev = [
@@ -14,19 +19,15 @@ dev = [
     "pytest",
     "linkml-runtime>=1.8.3",
     "linkml>=1.8.5",
-]
-
-[build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
-
-[dependency-groups]
-dev = [
     "mkdocs-material>=9.5.48",
     "mkdocs>=1.6.1",
     "mkdocstrings[python]>=0.27.0",
     "griffe-pydantic>=1.1.0",
 ]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
 
 [tool.pytest.ini_options]
 addopts = "--doctest-modules"
