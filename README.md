@@ -24,3 +24,7 @@ for test_case in get_all_tests():
 
 This repo also includes a LinkML schema for describing the official JSON-LD test suite.
 Feel free to re-use this for generating code that relates to these entities.
+
+## Documentation
+
+API docs are available at **<https://multimeric.github.io/json-ld-test/>**.
