@@ -1,6 +1,6 @@
 [project]
 name = "json-ld-test"
-version = "0.0.1"
+version = "0.0.2"
 dependencies = [
     "linkml-runtime>=1.8.3",
     "pydantic"
@@ -37,4 +37,3 @@ addopts = "--doctest-modules"
 
 [tool.setuptools.package-data]
 "*" = ["*.jsonld", "*.yml", "*.html*", "*.nq"]
-json_ld_test = ["*.txt", "*.rst"]
